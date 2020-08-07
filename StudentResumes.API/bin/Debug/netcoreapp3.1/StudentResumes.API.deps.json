@@ -28,7 +28,6 @@
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "3.1.6",
           "Microsoft.EntityFrameworkCore": "3.1.6",
           "Microsoft.EntityFrameworkCore.Sqlite": "3.1.6",
-          "StudentResumes.AUTH": "1.0.0",
           "StudentResumes.Core": "1.0.0",
           "StudentResumes.Data": "1.0.0",
           "Swashbuckle.AspNetCore": "5.5.1",
@@ -505,7 +504,7 @@
       "Microsoft.AspNetCore.JsonPatch/3.1.6": {
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
-          "Newtonsoft.Json": "12.0.2"
+          "Newtonsoft.Json": "12.0.3"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.dll": {
@@ -520,7 +519,7 @@
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson/3.1.6": {
         "dependencies": {
           "Microsoft.AspNetCore.JsonPatch": "3.1.6",
-          "Newtonsoft.Json": "12.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "Newtonsoft.Json.Bson": "1.0.2"
         },
         "runtime": {
@@ -922,7 +921,7 @@
       "Microsoft.IdentityModel.Protocols.OpenIdConnect/5.5.0": {
         "dependencies": {
           "Microsoft.IdentityModel.Protocols": "5.5.0",
-          "Newtonsoft.Json": "12.0.2",
+          "Newtonsoft.Json": "12.0.3",
           "System.IdentityModel.Tokens.Jwt": "6.7.1"
         },
         "runtime": {
@@ -975,11 +974,11 @@
           "System.Security.Principal.Windows": "4.5.0"
         }
       },
-      "Newtonsoft.Json/12.0.2": {
+      "Newtonsoft.Json/12.0.3": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "assemblyVersion": "12.0.0.0",
-            "fileVersion": "12.0.2.23222"
+            "fileVersion": "12.0.3.23909"
           }
         },
         "compile": {
@@ -988,7 +987,7 @@
       },
       "Newtonsoft.Json.Bson/1.0.2": {
         "dependencies": {
-          "Newtonsoft.Json": "12.0.2"
+          "Newtonsoft.Json": "12.0.3"
         },
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {
@@ -1269,26 +1268,16 @@
           "lib/netcoreapp3.0/System.Text.Json.dll": {}
         }
       },
-      "StudentResumes.AUTH/1.0.0": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Identity": "2.2.0",
-          "StudentResumes.Core": "1.0.0",
-          "StudentResumes.Data": "1.0.0",
-          "System.IdentityModel.Tokens.Jwt": "6.7.1"
-        },
-        "runtime": {
-          "StudentResumes.AUTH.dll": {}
-        },
-        "compile": {
-          "StudentResumes.AUTH.dll": {}
-        }
-      },
       "StudentResumes.Core/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Http.Features": "3.1.6",
+          "Microsoft.AspNetCore.Identity": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.6",
           "Microsoft.EntityFrameworkCore": "3.1.6",
-          "StudentResumes.Data": "1.0.0"
+          "Newtonsoft.Json": "12.0.3",
+          "StudentResumes.Data": "1.0.0",
+          "System.IdentityModel.Tokens.Jwt": "6.7.1"
         },
         "runtime": {
           "StudentResumes.Core.dll": {}
@@ -3324,12 +3313,12 @@
       "path": "microsoft.win32.registry/4.5.0",
       "hashPath": "microsoft.win32.registry.4.5.0.nupkg.sha512"
     },
-    "Newtonsoft.Json/12.0.2": {
+    "Newtonsoft.Json/12.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-rTK0s2EKlfHsQsH6Yx2smvcTCeyoDNgCW7FEYyV01drPlh2T243PR2DiDXqtC5N4GDm4Ma/lkxfW5a/4793vbA==",
-      "path": "newtonsoft.json/12.0.2",
-      "hashPath": "newtonsoft.json.12.0.2.nupkg.sha512"
+      "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+      "path": "newtonsoft.json/12.0.3",
+      "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
     },
     "Newtonsoft.Json.Bson/1.0.2": {
       "type": "package",
@@ -3505,11 +3494,6 @@
       "sha512": "sha512-TcMd95wcrubm9nHvJEQs70rC0H/8omiSGGpU4FQ/ZA1URIqD4pjmFJh2Mfv1yH1eHgJDWTi2hMDXwTET+zOOyg==",
       "path": "system.text.json/4.7.2",
       "hashPath": "system.text.json.4.7.2.nupkg.sha512"
-    },
-    "StudentResumes.AUTH/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     },
     "StudentResumes.Core/1.0.0": {
       "type": "project",

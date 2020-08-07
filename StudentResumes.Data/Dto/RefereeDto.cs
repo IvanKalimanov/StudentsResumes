@@ -19,4 +19,4 @@ namespace StudentResumes.Data.Dto
         }
     }
 }
-}
+

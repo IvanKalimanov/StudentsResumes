@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentResumes.Core.EF;
+using StudentResumes.Core.Exceptions;
 using StudentResumes.Data.Entities;
 using StudentResumes.Data.Repositories;
 using System;
@@ -30,7 +31,7 @@ namespace StudentResumes.Core.Repositories
         {
             var skill = await _context.Skills.FirstOrDefaultAsync(x => x.Name == name);
             if (skill == null)
-                return false;
+                throw new EntityNotFoundException();
 
             _context.Skills.Remove(skill);
             await _context.SaveChangesAsync();

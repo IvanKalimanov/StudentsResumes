@@ -804,10 +804,12 @@
         "dependencies": {
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Http.Features": "3.1.6",
+          "Microsoft.AspNetCore.Identity": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.6",
           "Microsoft.EntityFrameworkCore": "3.1.6",
           "Newtonsoft.Json": "12.0.3",
-          "StudentResumes.Data": "1.0.0"
+          "StudentResumes.Data": "1.0.0",
+          "System.IdentityModel.Tokens.Jwt": "6.7.1"
         },
         "compile": {
           "bin/placeholder/StudentResumes.Core.dll": {}
@@ -2206,9 +2208,6 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.AUTH\\StudentResumes.AUTH.csproj": {
-              "projectPath": "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.AUTH\\StudentResumes.AUTH.csproj"
-            },
             "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.Data\\StudentResumes.Data.csproj": {
               "projectPath": "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.Data\\StudentResumes.Data.csproj"
             },

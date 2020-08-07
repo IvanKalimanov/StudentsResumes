@@ -9,3 +9,4 @@ C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\bin\Debug\netcoreapp3.1\
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\obj\Debug\netcoreapp3.1\StudentResumes.Core.csproj.CopyComplete
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\obj\Debug\netcoreapp3.1\StudentResumes.Core.dll
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\obj\Debug\netcoreapp3.1\StudentResumes.Core.pdb
+C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\obj\Debug\netcoreapp3.1\StudentResumes.Core.csproj.CoreCompileInputs.cache

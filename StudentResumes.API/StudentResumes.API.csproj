@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StudentResumes.AUTH\StudentResumes.AUTH.csproj" />
     <ProjectReference Include="..\StudentResumes.Data\StudentResumes.Data.csproj" />
     <ProjectReference Include="..\StudentResumes\StudentResumes.Core.csproj" />
   </ItemGroup>

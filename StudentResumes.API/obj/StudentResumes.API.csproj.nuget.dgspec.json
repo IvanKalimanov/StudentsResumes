@@ -30,9 +30,6 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.AUTH\\StudentResumes.AUTH.csproj": {
-                "projectPath": "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.AUTH\\StudentResumes.AUTH.csproj"
-              },
               "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.Data\\StudentResumes.Data.csproj": {
                 "projectPath": "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.Data\\StudentResumes.Data.csproj"
               },
@@ -216,6 +213,10 @@
               "target": "Package",
               "version": "[3.1.6, )"
             },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.6, )"
@@ -227,6 +228,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[12.0.3, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.7.1, )"
             }
           },
           "imports": [

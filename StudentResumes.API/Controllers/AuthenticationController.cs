@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StudentResumes.API.Models;
 using StudentResumes.AUTH.Interfaces;
+using StudentResumes.Core.Models;
 using StudentResumes.Data.Dto;
 using System;
 using System.Collections.Generic;
@@ -24,14 +25,7 @@ namespace StudentResumes.API.Controllers
         [Produces(typeof(object))]
         public async Task<ActionResult<object>> Login([FromBody] LoginViewModel form)
         {
-            try
-            {
-                return await _authService.Login(form.Email, form.Password);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(520, ex);
-            }
+            return new JsonResult(new Response<object>(await _authService.Login(form.Email, form.Password)));
         }
 
         [HttpPost]
@@ -39,14 +33,7 @@ namespace StudentResumes.API.Controllers
         [Produces(typeof(object))]
         public async Task<ActionResult<object>> Register([FromBody] LoginViewModel item)
         {
-            try
-            {
-                return await _authService.Register(new UserDto(item.Email, item.Password));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(520, ex);
-            }
+            return new JsonResult(new Response<object>(await _authService.Register(new UserDto(item.Email, item.Password))));
         }
 
     }

@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StudentResumes.API.Models;
+using StudentResumes.Core.Models;
+using StudentResumes.Data.Dto;
+using StudentResumes.Data.Entities;
 using StudentResumes.Data.Repositories;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
@@ -31,14 +34,7 @@ namespace StudentResumes.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            try
-            {
-                return Ok(await _studentSkillRepository.GetAsync());
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex);
-            }
+            return new JsonResult(new Response<ICollection<StudentSkill>>(await _studentSkillRepository.GetAsync()));
         }
 
         /// <summary>
@@ -51,14 +47,9 @@ namespace StudentResumes.API.Controllers
         [HttpGet("skillname/{skillName}")]
         public async Task<IActionResult> Get(string skillName)
         {
-            try
-            {
-                return Ok(await _studentSkillRepository.GetBySkillNameAsync(skillName));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex);
-            }
+            var result = await _studentSkillRepository.GetBySkillNameAsync(skillName);
+
+            return new JsonResult(new Response<ICollection<StudentSkill>>(result));
         }
 
         /// <summary>
@@ -71,14 +62,9 @@ namespace StudentResumes.API.Controllers
         [HttpGet("studentid/{id}")]
         public async Task<IActionResult> GetByStudentId(Guid id)
         {
-            try
-            {
-                return Ok(await _studentSkillRepository.GetByStudentIdAsync(id));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex);
-            }
+            var result = await _studentSkillRepository.GetByStudentIdAsync(id);
+
+            return new JsonResult(new Response<ICollection<StudentSkill>>(result));
         }
 
         /// <summary>
@@ -91,14 +77,9 @@ namespace StudentResumes.API.Controllers
         [HttpPost("skillsearch")]
         public async Task<IActionResult> SearchStudentsBySkills([FromBody] List<string> skills)
         {
-            try
-            {
-                return Ok(await _studentSkillRepository.SearchBySkillsAsync(skills));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex);
-            }
+            var result = await _studentSkillRepository.SearchBySkillsAsync(skills);
+
+            return new JsonResult(new Response<ICollection<StudentDto>>(result));
         }
 
 
@@ -109,19 +90,15 @@ namespace StudentResumes.API.Controllers
         /// <response code="401">Unauthorized</response>
         /// <response code="500">If something goes wrong on server</response>
         [SwaggerOperation("GetSkills")]
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] StudentSkillModel studentSkill)
         {
-            try
-            {
-                return Ok(await _studentSkillRepository.SetSkillsToStudentAsync(
-                    studentSkill.StudentId, studentSkill.SkillNames));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex);
-            }
+            var result = await _studentSkillRepository.SetSkillsToStudentAsync(
+                    studentSkill.StudentId, studentSkill.SkillNames);
+
+            return new JsonResult(new Response<ICollection<StudentSkill>>(result));
+
         }
 
 

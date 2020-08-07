@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using StudentResumes.Core.EF;
+using StudentResumes.Core.Exceptions;
 using StudentResumes.Core.Services;
 using StudentResumes.Data.Converters;
 using StudentResumes.Data.Dto;
@@ -110,7 +111,7 @@ namespace StudentResumes.Core.Repositories
             var student = await _context.Students.FindAsync(studentId);
 
             if (student == null)
-                return false;
+                throw new EntityNotFoundException();
 
             if (student.ResumeLink != null)
             {

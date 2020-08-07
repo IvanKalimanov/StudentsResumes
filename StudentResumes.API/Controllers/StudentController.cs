@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StudentResumes.Core.Models;
 using StudentResumes.Data.Dto;
 using StudentResumes.Data.Entities;
 using StudentResumes.Data.Repositories;
@@ -29,14 +30,7 @@ namespace StudentResumes.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            try
-            {
-                return Ok(await _repository.GetAsync());
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex);
-            }
+                return new JsonResult(new Response<IEnumerable<StudentDto>>(await _repository.GetAsync()));
         }
 
         /// <summary>
@@ -46,70 +40,35 @@ namespace StudentResumes.API.Controllers
         [HttpGet("byname/{name}")]
         public async Task<IActionResult> SearchByName(string name)
         {
-            try
-            {
-                return Ok(await _repository.SearchByNameAsync(name));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex);
-            }
+                return new JsonResult(new Response<ICollection<StudentDto>>(await _repository.SearchByNameAsync(name)));
         }
 
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Post([FromBody] StudentDto student)
         {
-            try
-            {
-                return Ok(await _repository.CreateAsync(student));
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e);
-            }
+                return new JsonResult(new Response<StudentDto>(await _repository.CreateAsync(student)));
         }
 
         [HttpPost("upload/{studentId}")]
         [Authorize]
         public async Task<IActionResult> UploadResume(Guid studentId, IFormFile file)
         {
-            try
-            {
-                return Ok(await _repository.UploadResumeFileAsync(file, studentId));
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e);
-            }
+                return new JsonResult(new Response<bool>(await _repository.UploadResumeFileAsync(file, studentId)));
         }
 
         [HttpDelete("{id}")]
         [Authorize]
         public async Task<IActionResult> Delete(Guid id)
         {
-            try
-            {
-                return Ok(await _repository.DeleteAsync(id));
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e);
-            }
+                return new JsonResult(new Response<bool>(await _repository.DeleteAsync(id)));
         }
 
         [HttpPut]
         [Authorize]
         public async Task<IActionResult> Update([FromBody] StudentDto student)
         {
-            try
-            {
-                return Ok(await _repository.UpdateAsync(student));
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e);
-            }
+                return new JsonResult(new Response<bool>(await _repository.UpdateAsync(student)));
         }
     }
 }
