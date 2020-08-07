@@ -8,7 +8,7 @@ namespace StudentResumes.Core.Models
     {
         public int Code { get; set; } = 200;
 
-        public TData Data { get; set; } = default(TData);
+        public TData Data { get; set; } = default;
 
         public string Error { get; set; } = null;
 

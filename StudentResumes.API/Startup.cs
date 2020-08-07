@@ -15,6 +15,7 @@ using StudentResumes.AUTH;
 using StudentResumes.AUTH.Interfaces;
 using StudentResumes.AUTH.Services;
 using StudentResumes.Core.EF;
+using StudentResumes.Core.ExceptionMiddleware;
 using StudentResumes.Core.Repositories;
 using StudentResumes.Core.Services;
 using StudentResumes.Core.Services.Impl;
@@ -78,6 +79,8 @@ namespace StudentResumes.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.ConfigureExceptionMiddleware();
 
             app.UseAuthentication();
 

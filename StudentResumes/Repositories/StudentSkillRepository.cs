@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentResumes.Core.EF;
+using StudentResumes.Core.Exceptions;
 using StudentResumes.Data.Converters;
 using StudentResumes.Data.Dto;
 using StudentResumes.Data.Entities;
@@ -38,10 +39,16 @@ namespace StudentResumes.Core.Repositories
 
         public async Task<ICollection<StudentSkill>> SetSkillsToStudentAsync(Guid studentId, ICollection<string> skillNames)
         {
+            if (await _context.Students.FindAsync(studentId) == null)
+                throw new EntityNotFoundException();
+
             ICollection<StudentSkill> result = new List<StudentSkill>();
             foreach (var name in skillNames)
             {
-                var studentSkill = await CreateStudentSkill(studentId, name);
+                if (await _context.Skills.FindAsync(name) == null)
+                    throw new EntityNotFoundException();
+
+                var studentSkill = new StudentSkill(studentId, name);
                 result.Add(studentSkill);
             }
             await _context.StudentSkills.AddRangeAsync(result);
@@ -73,12 +80,7 @@ namespace StudentResumes.Core.Repositories
                                                                 .ToList());
         }
 
-        private async Task<StudentSkill> CreateStudentSkill(Guid studentId, string skillName)
-        {
-            var result = await _context.StudentSkills.AddAsync(
-                new StudentSkill(studentId, skillName));
-            return result.Entity;
-        }
+
 
         private class SearchingEntity
         {

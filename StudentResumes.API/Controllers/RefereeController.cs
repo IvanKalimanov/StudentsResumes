@@ -9,6 +9,7 @@ using Swashbuckle.AspNetCore.Annotations;
 using Microsoft.AspNetCore.Authorization;
 using StudentResumes.Data.Dto;
 using StudentResumes.API.Models;
+using StudentResumes.Core.Models;
 
 namespace StudentResumes.API.Controllers
 {
@@ -29,56 +30,32 @@ namespace StudentResumes.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            try
-            {
-                return Ok(await _repository.GetAsync());
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex);
-            }
+                return new JsonResult(new Response<IEnumerable<Referee>>(await _repository.GetAsync()));
         }
 
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Post([FromBody] RefereeCreatingModel referee)
         {
-            try
-            {
-                return Ok(await _repository.CreateAsync(new RefereeDto(referee.Name, referee.WorkPosition)));
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e);
-            }
+            var result = await _repository.CreateAsync(new RefereeDto(referee.Name, referee.WorkPosition));
+            
+            return new JsonResult(new Response<Referee>(result));
+
         }
 
         [HttpDelete("{id}")]
         [Authorize]
         public async Task<IActionResult> Delete(Guid id)
         {
-            try
-            {
-                return Ok(await _repository.DeleteAsync(id));
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e);
-            }
+            return new JsonResult(new Response<bool>(await _repository.DeleteAsync(id)));
         }
+           
 
         [HttpPut]
         [Authorize]
         public async Task<IActionResult> Update([FromBody] RefereeDto referee)
         {
-            try
-            {
-                return Ok(await _repository.UpdateAsync(referee));
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e);
-            }
+            return new JsonResult(new Response<bool>(await _repository.UpdateAsync(referee)));
         }
     }
 }

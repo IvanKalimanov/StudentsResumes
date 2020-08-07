@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentResumes.Core.EF;
+using StudentResumes.Core.Exceptions;
 using StudentResumes.Data.Converters;
 using StudentResumes.Data.Dto;
 using StudentResumes.Data.Entities;
@@ -31,9 +32,10 @@ namespace StudentResumes.Core.Repositories
         public async Task<bool> DeleteAsync(Guid id)
         {
             Referee referee = await _context.Referees.FindAsync(id);
+
             if (referee == null)
-                return false;
-            _context.Referees.Remove(referee);
+                throw new EntityNotFoundException();
+
             await _context.SaveChangesAsync();
             return true;
         }
@@ -45,22 +47,25 @@ namespace StudentResumes.Core.Repositories
 
         public async Task<Referee> GetByIdAsync(Guid id)
         {
-            return await _context.Referees.Include(x => x.Students).FirstOrDefaultAsync(x => x.Id == id);
+            var referee = await _context.Referees.Include(x => x.Students).FirstOrDefaultAsync(x => x.Id == id);
+
+            if (referee == null)
+                throw new EntityNotFoundException();
+
+            return referee;
         }
 
         public async Task<bool> UpdateAsync(RefereeDto referee)
         {
             var oldReferee = await _context.Referees.FindAsync(referee.Id);
 
-            if (oldReferee != null)
-            {
-                oldReferee.Name = referee.Name;
-                oldReferee.WorkPosition = referee.WorkPosition;
-                await _context.SaveChangesAsync();
-                return true;
-            }
+            if (oldReferee == null)
+                throw new EntityNotFoundException();
 
-            return false;
+            oldReferee.Name = referee.Name;
+            oldReferee.WorkPosition = referee.WorkPosition;
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }
