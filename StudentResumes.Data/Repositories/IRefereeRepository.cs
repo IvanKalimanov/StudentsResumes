@@ -1,4 +1,5 @@
-﻿using StudentResumes.Data.Entities;
+﻿using StudentResumes.Data.Dto;
+using StudentResumes.Data.Entities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,9 +14,9 @@ namespace StudentResumes.Data.Repositories
 
         Task<Referee> GetByIdAsync(Guid id);
 
-        Task<Referee> CreateAsync(Referee referee);
+        Task<Referee> CreateAsync(RefereeDto referee);
 
-        Task<bool> UpdateAsync(Referee referee);
+        Task<bool> UpdateAsync(RefereeDto referee);
 
         Task<bool> DeleteAsync(Guid id);
     }

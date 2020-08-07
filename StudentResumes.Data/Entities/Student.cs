@@ -10,14 +10,16 @@ namespace StudentResumes.Data.Entities
 
         public string Name { get; set; }
 
-        public string Surename { get; set; }
-
-        public byte CourseNumber { get; set; }
+        public byte? CourseNumber { get; set; }
 
         public string ResumeLink { get; set; }
 
-        public List<Skill> Skills { get; set; } = new List<Skill>();
+        public ICollection<StudentSkill> StudentSkills { get; set; } 
 
         public string UniversityName { get; set; }
+
+        public Guid? RefereeId { get; set; }
+
+        public Referee Referee { get; set; }
     }
 }

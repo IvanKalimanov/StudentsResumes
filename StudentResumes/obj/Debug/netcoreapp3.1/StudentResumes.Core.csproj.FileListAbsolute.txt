@@ -3,7 +3,6 @@ C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\bin\Debug\netcoreapp3.1\
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\obj\Debug\netcoreapp3.1\StudentResumes.Core.csprojAssemblyReference.cache
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\obj\Debug\netcoreapp3.1\StudentResumes.Core.AssemblyInfoInputs.cache
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\obj\Debug\netcoreapp3.1\StudentResumes.Core.AssemblyInfo.cs
-C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\obj\Debug\netcoreapp3.1\StudentResumes.Core.csproj.CoreCompileInputs.cache
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\bin\Debug\netcoreapp3.1\StudentResumes.Core.pdb
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\bin\Debug\netcoreapp3.1\StudentResumes.Data.dll
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\bin\Debug\netcoreapp3.1\StudentResumes.Data.pdb

@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentResumes.Core.EF;
+using StudentResumes.Data.Converters;
+using StudentResumes.Data.Dto;
 using StudentResumes.Data.Entities;
 using StudentResumes.Data.Repositories;
 using System;
@@ -12,36 +14,53 @@ namespace StudentResumes.Core.Repositories
     public class RefereeRepository : IRefereeRepository
     {
         private readonly ResumesContext _context;
-        private readonly IRefereeRepository _refereeRepository;
 
         public RefereeRepository(ResumesContext context)
         {
             _context = context;
         }
 
-        public Task<Referee> CreateAsync(Referee referee)
+        public async Task<Referee> CreateAsync(RefereeDto refereeDto)
         {
-            throw new NotImplementedException();
+            var referee = RefereeConverter.Convert(refereeDto);
+            var result = await _context.Referees.AddAsync(referee);
+            await _context.SaveChangesAsync();
+            return result.Entity;
         }
 
-        public Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            Referee referee = await _context.Referees.FindAsync(id);
+            if (referee == null)
+                return false;
+            _context.Referees.Remove(referee);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         public async Task<IEnumerable<Referee>> GetAsync()
         {
-            return await _context.Referees.ToListAsync();
+            return await _context.Referees.Include(x => x.Students).ToListAsync();
         }
 
-        public Task<Referee> GetByIdAsync(Guid id)
+        public async Task<Referee> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.Referees.Include(x => x.Students).FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<bool> UpdateAsync(Referee referee)
+        public async Task<bool> UpdateAsync(RefereeDto referee)
         {
-            throw new NotImplementedException();
+            var oldReferee = await _context.Referees.FindAsync(referee.Id);
+
+            if (oldReferee != null)
+            {
+                oldReferee.Name = referee.Name;
+                oldReferee.WorkPosition = referee.WorkPosition;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
         }
     }
 }

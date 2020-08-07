@@ -9,7 +9,7 @@ namespace StudentResumes.Data.Repositories
 {
     public interface ISkillRepository
     {
-        Task<IEnumerable<Skill>> GetAsync();
+        Task<IEnumerable<string>> GetAsync();
 
         Task<Skill> CreateAsync(string name);
 
