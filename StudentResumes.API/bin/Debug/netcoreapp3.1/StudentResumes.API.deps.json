@@ -28,7 +28,6 @@
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "3.1.6",
           "Microsoft.EntityFrameworkCore": "3.1.6",
           "Microsoft.EntityFrameworkCore.Sqlite": "3.1.6",
-          "StudentResumes.AUTH": "1.0.0",
           "StudentResumes.Core": "1.0.0",
           "StudentResumes.Data": "1.0.0",
           "Swashbuckle.AspNetCore": "5.5.1",
@@ -1269,28 +1268,16 @@
           "lib/netcoreapp3.0/System.Text.Json.dll": {}
         }
       },
-      "StudentResumes.AUTH/1.0.0": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Identity": "2.2.0",
-          "StudentResumes.Core": "1.0.0",
-          "StudentResumes.Data": "1.0.0",
-          "System.IdentityModel.Tokens.Jwt": "6.7.1"
-        },
-        "runtime": {
-          "StudentResumes.AUTH.dll": {}
-        },
-        "compile": {
-          "StudentResumes.AUTH.dll": {}
-        }
-      },
       "StudentResumes.Core/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Http.Features": "3.1.6",
+          "Microsoft.AspNetCore.Identity": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.6",
           "Microsoft.EntityFrameworkCore": "3.1.6",
           "Newtonsoft.Json": "12.0.3",
-          "StudentResumes.Data": "1.0.0"
+          "StudentResumes.Data": "1.0.0",
+          "System.IdentityModel.Tokens.Jwt": "6.7.1"
         },
         "runtime": {
           "StudentResumes.Core.dll": {}
@@ -3507,11 +3494,6 @@
       "sha512": "sha512-TcMd95wcrubm9nHvJEQs70rC0H/8omiSGGpU4FQ/ZA1URIqD4pjmFJh2Mfv1yH1eHgJDWTi2hMDXwTET+zOOyg==",
       "path": "system.text.json/4.7.2",
       "hashPath": "system.text.json.4.7.2.nupkg.sha512"
-    },
-    "StudentResumes.AUTH/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     },
     "StudentResumes.Core/1.0.0": {
       "type": "project",

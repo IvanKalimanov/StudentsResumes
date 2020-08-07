@@ -84,8 +84,6 @@ C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
-C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp3.1\StudentResumes.AUTH.dll
-C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp3.1\StudentResumes.AUTH.pdb
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll

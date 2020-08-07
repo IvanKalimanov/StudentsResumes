@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StudentResumes.Core.Models;
+using StudentResumes.Data.Entities;
 using StudentResumes.Data.Repositories;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
@@ -29,14 +31,7 @@ namespace StudentResumes.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            try
-            {
-                return Ok(await _skillRepository.GetAsync());
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex);
-            }
+                return new JsonResult(new Response<IEnumerable<string>>(await _skillRepository.GetAsync()));
         }
 
         /// <summary>
@@ -51,14 +46,7 @@ namespace StudentResumes.API.Controllers
         [HttpPost("{name}")]
         public async Task<IActionResult> Post(string name)
         {
-            try
-            {
-                return Ok(await _skillRepository.CreateAsync(name));
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e);
-            }
+                return new JsonResult(new Response<Skill>(await _skillRepository.CreateAsync(name)));
         }
 
         /// <summary>
@@ -73,14 +61,7 @@ namespace StudentResumes.API.Controllers
         [HttpDelete("{name}")]
         public async Task<IActionResult> Delete(string name)
         {
-            try
-            {
-                return Ok(await _skillRepository.DeleteAsync(name));
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e);
-            }
+            return new JsonResult(new Response<bool>(await _skillRepository.DeleteAsync(name)));
         }
 
     }
