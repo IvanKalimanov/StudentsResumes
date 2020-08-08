@@ -9,5 +9,14 @@ namespace StudentResumes.Core.Exceptions
 
     }
 
+    public class UserNotFoundException : Exception
+    {
+
+    }
+
+    public class InvalidLoginOrPasswordException : Exception
+    {
+
+    }
 
 }

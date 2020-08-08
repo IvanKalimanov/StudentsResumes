@@ -19,11 +19,14 @@ using StudentResumes.Core.ExceptionMiddleware;
 using StudentResumes.Core.Repositories;
 using StudentResumes.Core.Services;
 using StudentResumes.Core.Services.Impl;
+using StudentResumes.Data;
 using StudentResumes.Data.Entities;
 using StudentResumes.Data.Repositories;
 using StudentResumes.Data.Settings;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Text;
 
 namespace StudentResumes.API
@@ -67,8 +70,10 @@ namespace StudentResumes.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime, ILoggerFactory loggerFactory)
         {
+            RegisterLogger(env, loggerFactory, applicationLifetime);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -200,12 +205,26 @@ namespace StudentResumes.API
                     }
                 });
 
-                //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                //c.IncludeXmlComments(xmlPath);
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
         }
 
+        private static void RegisterLogger(IHostEnvironment env, ILoggerFactory loggerFactory, IHostApplicationLifetime applicationLifetime)
+        {
+            var log4NetProviderOptions = new Log4NetProviderOptions("log4net.config");
+
+            loggerFactory.AddLog4Net(log4NetProviderOptions);
+            Logger.RegisterLogger(loggerFactory.CreateLogger("LOGGER"));
+
+            applicationLifetime.ApplicationStarted.Register(
+                () =>
+                {
+                    Logger.Log.LogInformation("Service started");
+                    Logger.Log.LogInformation($"Settings {env.EnvironmentName}");
+                });
+        }
 
         private void AddDbConnection(IServiceCollection services)
         {

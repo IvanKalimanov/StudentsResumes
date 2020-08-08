@@ -25,13 +25,13 @@ namespace StudentResumes.API.Controllers
         /// Get all skills
         /// </summary>
         /// <response code="200">Returns skills</response>
-        /// <response code="401">Unauthorized</response>
         /// <response code="500">If something goes wrong on server</response>
-        [SwaggerOperation("GetSkills")]
+        [SwaggerResponse(statusCode: 200, type: typeof(Response<IEnumerable<string>>), description: "Skills as strings")]
+        [SwaggerOperation("Get")]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-                return new JsonResult(new Response<IEnumerable<string>>(await _skillRepository.GetAsync()));
+            return new JsonResult(new Response<IEnumerable<string>>(await _skillRepository.GetAsync()));
         }
 
         /// <summary>
@@ -41,22 +41,25 @@ namespace StudentResumes.API.Controllers
         /// <response code="200">Returns new skill</response>
         /// <response code="401">Unauthorized</response>
         /// <response code="500">If something goes wrong on server</response>
-        [SwaggerOperation("CreateSkill")]
-       // [Authorize]
+        [SwaggerOperation("Post")]
+        [SwaggerResponse(statusCode: 200, type: typeof(Response<Skill>), description: "New skill")]
+        [Authorize]
         [HttpPost("{name}")]
         public async Task<IActionResult> Post(string name)
         {
-                return new JsonResult(new Response<Skill>(await _skillRepository.CreateAsync(name)));
+            return new JsonResult(new Response<Skill>(await _skillRepository.CreateAsync(name)));
         }
 
         /// <summary>
         /// Delete skill by name
         /// </summary>
         /// <param name="name"></param>
-        /// <response code="200">Returns true</response>
+        /// <response code="200">Returns true, if skill was deleted succefully</response>
         /// <response code="401">Unauthorized</response>
+        /// <response code="404">If entity was not found</response>
         /// <response code="500">If something goes wrong on server</response>
-        [SwaggerOperation("DeleteSkill")]
+        [SwaggerOperation("Delete")]
+        [SwaggerResponse(statusCode: 200, type: typeof(Response<bool>), description: "True if success")]
         [Authorize]
         [HttpDelete("{name}")]
         public async Task<IActionResult> Delete(string name)

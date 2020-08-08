@@ -87,6 +87,11 @@ C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp3.1\log4net.config
+C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp3.1\log4net.dll
+C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\obj\Debug\netcoreapp3.1\StudentResumes.API.csproj.CoreCompileInputs.cache
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\obj\Debug\netcoreapp3.1\StudentResumes.API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\obj\Debug\netcoreapp3.1\StudentResumes.API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\bin\Debug\netcoreapp3.1\StudentResumes.API.xml
+C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\obj\Debug\netcoreapp3.1\StudentResumes.API.xml

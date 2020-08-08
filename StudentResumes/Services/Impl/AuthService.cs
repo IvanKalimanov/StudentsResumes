@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using StudentResumes.AUTH.Interfaces;
 using StudentResumes.Core.EF;
+using StudentResumes.Core.Exceptions;
 using StudentResumes.Data.Converters;
 using StudentResumes.Data.Dto;
 using StudentResumes.Data.Entities;
@@ -32,49 +33,35 @@ namespace StudentResumes.AUTH.Services
 
         public async Task<object> Login(string email, string password)
         {
-            try
-            {
-                if (email == null || password == null)
-                    return null;
+            if (email == null || password == null)
+                throw new InvalidLoginOrPasswordException();
 
-                var result = await _signInManager.PasswordSignInAsync(email, password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(email, password, false, false);
 
-                if (result.Succeeded)
-                {
-                    var appUser = await _userManager.FindByEmailAsync(email);
-                    return await _jwt.GenerateJwt(appUser);
-                }
-                return null;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            if (!result.Succeeded)
+                throw new InvalidLoginOrPasswordException();
+
+            var appUser = await _userManager.FindByEmailAsync(email);
+
+            return await _jwt.GenerateJwt(appUser);
+
         }
 
         public async Task<object> Register(UserDto item)
         {
-            try
-            {
-                User user = UserConverter.Convert(item);
-                if (user == null)
-                    return null;
+            User user = UserConverter.Convert(item);
+            if (user == null)
+                throw new ArgumentNullException();
 
-                var result = await _userManager.CreateAsync(user, item.Password);
+            var result = await _userManager.CreateAsync(user, item.Password);
 
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(user, "admin");
-                    await _signInManager.SignInAsync(user, false);
-                    return await _jwt.GenerateJwt(user);
-                }
+            if (!result.Succeeded)
+                throw new InvalidLoginOrPasswordException();
 
-                return null;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            await _userManager.AddToRoleAsync(user, "admin");
+            await _signInManager.SignInAsync(user, false);
+            return await _jwt.GenerateJwt(user);
+
         }
     }
 }

@@ -6,27 +6,27 @@ namespace StudentResumes.Core.Models
 {
     public class Response<TData>
     {
-        public int Code { get; set; } = 200;
+        public int StatusCode { get; set; } = 200;
 
         public TData Data { get; set; } = default;
 
-        public string Error { get; set; } = null;
+        public string Message { get; set; } = null;
 
         public Response(TData item)
         {
             Data = item;
-            Code = 200;
+            StatusCode = 200;
         }
 
         public Response(int code, string error)
         {
-            Code = code;
-            Error = error;
+            StatusCode = code;
+            Message = error;
         }
 
         public bool Succeeded()
         {
-            return Code == 200 && Error == null;
+            return StatusCode == 200 && Message == null;
         }
     }
 }

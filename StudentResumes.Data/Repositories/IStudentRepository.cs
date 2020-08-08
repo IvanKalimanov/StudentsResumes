@@ -15,7 +15,7 @@ namespace StudentResumes.Data.Repositories
 
         Task<StudentDto> GetByIdAsync(Guid id);
 
-        Task<StudentDto> CreateAsync(StudentDto studentDto);
+        Task<StudentDto> CreateAsync(StudentDto studentDto, IFormFile file);
 
         Task<bool> UpdateAsync(StudentDto studentDto);
 

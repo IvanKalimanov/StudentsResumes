@@ -29,7 +29,7 @@ namespace StudentResumes.Core.Repositories
             _storageService = storageService;
         }
 
-        public async Task<StudentDto> CreateAsync(StudentDto studentDto)
+        public async Task<StudentDto> CreateAsync(StudentDto studentDto, IFormFile file)
         {
             var student = StudentConverter.Convert(studentDto);
 
@@ -47,7 +47,12 @@ namespace StudentResumes.Core.Repositories
                 if (referee != null)
                     student.Referee = referee;
             }
-            await _context.SaveChangesAsync();
+
+            await _context.SaveChangesAsync();  
+            
+            if (file != null)
+                await UploadResumeFileAsync(file, result.Entity.Id);
+
             return StudentConverter.Convert(result.Entity);
         }
 

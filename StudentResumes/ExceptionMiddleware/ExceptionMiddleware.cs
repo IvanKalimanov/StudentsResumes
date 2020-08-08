@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using StudentResumes.Core.Exceptions;
 using StudentResumes.Core.Models;
+using StudentResumes.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,7 +33,7 @@ namespace StudentResumes.Core.ExceptionMiddleware
             }
             catch (Exception ex)
             {
-                //Logger.Log.LogError(ex.Message + ex.StackTrace);
+                Logger.Log.LogError(ex.Message + ex.StackTrace);
                 await HandleExceptionAsync(httpContext, ex);
             }
         }
@@ -45,7 +47,7 @@ namespace StudentResumes.Core.ExceptionMiddleware
             if (exception.GetType() == typeof(DbUpdateException))
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                response = new Response<int>((int)HttpStatusCode.NotFound, "Error while updating database. Check data you sent");
+                response = new Response<int>((int)HttpStatusCode.InternalServerError, "Error while updating database. Check data you sent");
             }
             
             if (exception.GetType() == typeof(EntityNotFoundException))
@@ -60,6 +62,11 @@ namespace StudentResumes.Core.ExceptionMiddleware
                 response = new Response<int>((int)HttpStatusCode.NotFound, "Something went wrong");
             }
 
+            if(exception.GetType() == typeof(InvalidLoginOrPasswordException))
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                response = new Response<int>((int)HttpStatusCode.InternalServerError, "Invalid login or password");
+            }
 
 
             return context.Response.WriteAsync(JsonConvert.SerializeObject(response));
