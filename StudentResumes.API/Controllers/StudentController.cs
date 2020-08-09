@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StudentResumes.API.Models;
 using StudentResumes.Core.Models;
 using StudentResumes.Data.Dto;
 using StudentResumes.Data.Entities;
@@ -17,10 +19,12 @@ namespace StudentResumes.API.Controllers
     public class StudentController : Controller
     {
         private readonly IStudentRepository _repository;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public StudentController(IStudentRepository repository)
+        public StudentController(IStudentRepository repository, IWebHostEnvironment webHostEnvironment)
         {
             _repository = repository;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         /// <summary>
@@ -34,7 +38,7 @@ namespace StudentResumes.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-                return new JsonResult(new Response<IEnumerable<StudentDto>>(await _repository.GetAsync()));
+            return new JsonResult(new Response<IEnumerable<StudentDto>>(await _repository.GetAsync()));
         }
 
         /// <summary>
@@ -53,10 +57,36 @@ namespace StudentResumes.API.Controllers
         }
 
         /// <summary>
+        /// Create student and upload reusme file
+        /// </summary>
+        /// <param name="studentModel"></param>
+        /// <param name="file"></param>
+        /// <response code="200">Returns new student</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="500">If something goes wrong on server</response>
+        [SwaggerOperation("Post")]
+        [SwaggerResponse(statusCode: 200, type: typeof(Response<StudentDto>), description: "New student")]
+        [HttpPost("createandupload")]
+        [Authorize]
+        public async Task<IActionResult> Post(IFormFile file, StudentCreatingModel studentModel)
+        {
+            var student = new StudentDto()
+            {
+                Name = studentModel.Name,
+                CourseNumber = studentModel.CourseNumber,
+                Skills = studentModel.Skills,
+                UniversityName = studentModel.UniversityName,
+                RefereeId = studentModel.RefereeId
+            };
+            var result = await _repository.CreateWithResumeAsync(student, file, _webHostEnvironment.ContentRootPath);
+
+            return new JsonResult(new Response<StudentDto>(result));
+        }
+
+        /// <summary>
         /// Create student
         /// </summary>
-        /// <param name="student"></param>
-        /// <param name="file"></param>
+        /// <param name="studentModel"></param>
         /// <response code="200">Returns new student</response>
         /// <response code="401">Unauthorized</response>
         /// <response code="500">If something goes wrong on server</response>
@@ -64,11 +94,18 @@ namespace StudentResumes.API.Controllers
         [SwaggerResponse(statusCode: 200, type: typeof(Response<StudentDto>), description: "New student")]
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Post([FromBody] StudentDto student, IFormFile file)
+        public async Task<IActionResult> Post([FromBody] StudentCreatingModel studentModel)
         {
-            return new JsonResult(new Response<StudentDto>(await _repository.CreateAsync(student, file)));
+            var student = new StudentDto()
+            {
+                Name = studentModel.Name,
+                CourseNumber = studentModel.CourseNumber,
+                Skills = studentModel.Skills,
+                UniversityName = studentModel.UniversityName,
+                RefereeId = studentModel.RefereeId
+            };
+            return new JsonResult(new Response<StudentDto>(await _repository.CreateAsync(student)));
         }
-
 
         /// <summary>
         /// Upload resume file
@@ -85,7 +122,9 @@ namespace StudentResumes.API.Controllers
         [Authorize]
         public async Task<IActionResult> UploadResume(Guid studentId, IFormFile file)
         {
-            return new JsonResult(new Response<bool>(await _repository.UploadResumeFileAsync(file, studentId)));
+            var result = await _repository.UploadResumeFileAsync(file, studentId, _webHostEnvironment.WebRootPath);
+
+            return new JsonResult(new Response<bool>(result));
         }
 
         /// <summary>

@@ -57,7 +57,7 @@ namespace StudentResumes.API.Controllers
         [SwaggerOperation("Register")]
         [SwaggerResponse(statusCode: 200, type: typeof(Response<object>), description: "Access token")]
         [HttpPost]
-       // [Authorize]
+        [Authorize]
         [Produces(typeof(object))]
         public async Task<ActionResult<object>> Register([FromBody] LoginViewModel item)
         {

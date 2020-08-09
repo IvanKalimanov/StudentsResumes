@@ -15,13 +15,15 @@ namespace StudentResumes.Data.Repositories
 
         Task<StudentDto> GetByIdAsync(Guid id);
 
-        Task<StudentDto> CreateAsync(StudentDto studentDto, IFormFile file);
+        Task<StudentDto> CreateAsync(StudentDto studentDto);
+
+        Task<StudentDto> CreateWithResumeAsync(StudentDto studentDto, IFormFile file, string webRootPath);
 
         Task<bool> UpdateAsync(StudentDto studentDto);
 
         Task<bool> DeleteAsync(Guid id);
 
-        Task<bool> UploadResumeFileAsync(IFormFile file, Guid studentId);
+        Task<bool> UploadResumeFileAsync(IFormFile file, Guid studentId, string webRootPath);
 
         Task<ICollection<StudentDto>> SearchByNameAsync(string name);
     }

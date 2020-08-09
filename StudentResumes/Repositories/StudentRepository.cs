@@ -29,31 +29,19 @@ namespace StudentResumes.Core.Repositories
             _storageService = storageService;
         }
 
-        public async Task<StudentDto> CreateAsync(StudentDto studentDto, IFormFile file)
+        public async Task<StudentDto> CreateAsync (StudentDto studentDto)
         {
-            var student = StudentConverter.Convert(studentDto);
+            return StudentConverter.Convert(await CreateStudentAsync(studentDto));
+        }
 
-            var result = await _context.Students.AddAsync(student);
+        public async Task<StudentDto> CreateWithResumeAsync(StudentDto studentDto, IFormFile file, string rootPath)
+        {
+            var student = await CreateStudentAsync(studentDto);
             
-            foreach(var skillName in studentDto.Skills)
-            {
-                var sk = await _context.Skills.FindAsync(skillName);
-                if (sk != null)
-                    await _context.StudentSkills.AddAsync(new StudentSkill(student.Id, sk.Name));
-            }
-            if (student.RefereeId != null)
-            {
-                var referee = await _refereeRepository.GetByIdAsync((Guid)student.RefereeId);
-                if (referee != null)
-                    student.Referee = referee;
-            }
+            if (file != null && student != null)
+                await UploadResumeFileAsync(file, student.Id, rootPath);
 
-            await _context.SaveChangesAsync();  
-            
-            if (file != null)
-                await UploadResumeFileAsync(file, result.Entity.Id);
-
-            return StudentConverter.Convert(result.Entity);
+            return StudentConverter.Convert(student);
         }
 
         public async Task<bool> DeleteAsync(Guid id)
@@ -111,7 +99,7 @@ namespace StudentResumes.Core.Repositories
             return true;
         }
 
-        public async Task<bool> UploadResumeFileAsync(IFormFile file, Guid studentId)
+        public async Task<bool> UploadResumeFileAsync(IFormFile file, Guid studentId, string rootPath)
         {
             var student = await _context.Students.FindAsync(studentId);
 
@@ -125,9 +113,9 @@ namespace StudentResumes.Core.Repositories
             }
             var filename = student.Name + "Resume" + Path.GetExtension(file.FileName);
 
-            var link = await _storageService.UploadAsync(file, filename, "/resumes/");
+            var link = await _storageService.UploadAsync(file, filename, "resumes/");
 
-            student.ResumeLink = link;
+            student.ResumeLink = rootPath + '/' + link;
 
             return true;
         }
@@ -139,6 +127,30 @@ namespace StudentResumes.Core.Repositories
             var result = await _context.Students.Where(x => x.Name.ToLower().Contains(name)).ToListAsync();
 
             return StudentConverter.Convert(result);
+        }
+
+        private async Task<Student> CreateStudentAsync(StudentDto studentDto)
+        {
+            var student = StudentConverter.Convert(studentDto);
+
+            var result = await _context.Students.AddAsync(student);
+
+            foreach (var skillName in studentDto.Skills)
+            {
+                var sk = await _context.Skills.FindAsync(skillName);
+                if (sk != null)
+                    await _context.StudentSkills.AddAsync(new StudentSkill(student.Id, sk.Name));
+            }
+            if (student.RefereeId != null)
+            {
+                var referee = await _refereeRepository.GetByIdAsync((Guid)student.RefereeId);
+                if (referee != null)
+                    student.Referee = referee;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return result.Entity;
         }
     }
 }

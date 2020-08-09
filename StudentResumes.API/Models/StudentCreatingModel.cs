@@ -11,8 +11,6 @@ namespace StudentResumes.API.Models
 
         public byte? CourseNumber { get; set; }
 
-        public string ResumeLink { get; set; }
-
         public ICollection<string> Skills { get; set; }
 
         public string UniversityName { get; set; }

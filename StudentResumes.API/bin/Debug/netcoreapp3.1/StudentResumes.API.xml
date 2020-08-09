@@ -106,12 +106,21 @@
             <response code="401">Unauthorized</response>
             <response code="500">If something goes wrong on server</response>
         </member>
-        <member name="M:StudentResumes.API.Controllers.StudentController.Post(StudentResumes.Data.Dto.StudentDto,Microsoft.AspNetCore.Http.IFormFile)">
+        <member name="M:StudentResumes.API.Controllers.StudentController.Post(Microsoft.AspNetCore.Http.IFormFile,StudentResumes.API.Models.StudentCreatingModel)">
+            <summary>
+            Create student and upload reusme file
+            </summary>
+            <param name="studentModel"></param>
+            <param name="file"></param>
+            <response code="200">Returns new student</response>
+            <response code="401">Unauthorized</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.StudentController.Post(StudentResumes.API.Models.StudentCreatingModel)">
             <summary>
             Create student
             </summary>
-            <param name="student"></param>
-            <param name="file"></param>
+            <param name="studentModel"></param>
             <response code="200">Returns new student</response>
             <response code="401">Unauthorized</response>
             <response code="500">If something goes wrong on server</response>
