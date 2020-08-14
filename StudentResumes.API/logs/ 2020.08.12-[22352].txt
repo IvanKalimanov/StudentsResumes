@@ -1,0 +1,24 @@
+﻿2020-08-12 15:44:36,280  INFO  Service started
+2020-08-12 15:44:36,313  INFO  Settings Development
+2020-08-12 15:45:26,633  ERROR Could not find a part of the path 'C:\Users\X1CARBON\Desktop\StudentResumes\data\photos\IvanPhoto.jpg'.   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at System.IO.File.Create(String path)
+   at StudentResumes.Core.Services.Impl.StorageService.SaveFileAsync(String fullPath, IFormFile file) in C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\Services\Impl\StorageService.cs:line 62
+   at StudentResumes.Core.Services.Impl.StorageService.UploadAsync(IFormFile file, String fileName, String storagePrefix) in C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\Services\Impl\StorageService.cs:line 28
+   at StudentResumes.Core.Repositories.StudentRepository.UploadStudentPhotoFileAsync(IFormFile file, Guid studentId, String rootPath) in C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\Repositories\StudentRepository.cs:line 140
+   at StudentResumes.Core.Repositories.StudentRepository.CreateWithFilesAsync(StudentDto studentDto, IFormFile photo, IFormFile resume, String rootPath) in C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\Repositories\StudentRepository.cs:line 45
+   at StudentResumes.API.Controllers.StudentController.Post(IFormFile resumeFile, IFormFile photoFile, StudentCreatingModel studentModel) in C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.API\Controllers\StudentController.cs:line 90
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at StudentResumes.Core.ExceptionMiddleware.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes\ExceptionMiddleware\ExceptionMiddleware.cs:line 32

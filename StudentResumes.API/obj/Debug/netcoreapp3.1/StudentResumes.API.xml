@@ -106,12 +106,13 @@
             <response code="401">Unauthorized</response>
             <response code="500">If something goes wrong on server</response>
         </member>
-        <member name="M:StudentResumes.API.Controllers.StudentController.Post(Microsoft.AspNetCore.Http.IFormFile,StudentResumes.API.Models.StudentCreatingModel)">
+        <member name="M:StudentResumes.API.Controllers.StudentController.Post(Microsoft.AspNetCore.Http.IFormFile,Microsoft.AspNetCore.Http.IFormFile,StudentResumes.API.Models.StudentCreatingModel)">
             <summary>
-            Create student and upload reusme file
+            Create student and upload files
             </summary>
+            <param name="resumeFile"></param>
+            <param name="photoFile"></param>
             <param name="studentModel"></param>
-            <param name="file"></param>
             <response code="200">Returns new student</response>
             <response code="401">Unauthorized</response>
             <response code="500">If something goes wrong on server</response>
@@ -128,6 +129,17 @@
         <member name="M:StudentResumes.API.Controllers.StudentController.UploadResume(System.Guid,Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
             Upload resume file
+            </summary>
+            <param name="studentId"></param>
+            <param name="file"></param>
+            <response code="200">Returns true if success</response>
+            <response code="401">Unauthorized</response>
+            <response code="404">If entity was not found</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.StudentController.UploadStudentPhoto(System.Guid,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Upload student photo file
             </summary>
             <param name="studentId"></param>
             <param name="file"></param>

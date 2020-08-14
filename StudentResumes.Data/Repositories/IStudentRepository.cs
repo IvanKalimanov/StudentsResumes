@@ -17,7 +17,9 @@ namespace StudentResumes.Data.Repositories
 
         Task<StudentDto> CreateAsync(StudentDto studentDto);
 
-        Task<StudentDto> CreateWithResumeAsync(StudentDto studentDto, IFormFile file, string webRootPath);
+        Task<StudentDto> CreateWithFilesAsync(StudentDto studentDto, IFormFile photo, IFormFile resume, string rootPath);
+
+        Task<bool> UploadStudentPhotoFileAsync(IFormFile file, Guid studentId, string rootPath);
 
         Task<bool> UpdateAsync(StudentDto studentDto);
 

@@ -14,7 +14,9 @@ namespace StudentResumes.Data.Dto
 
         public string ResumeLink { get; set; }
 
-        public ICollection<string> Skills { get; set; }
+        public string PhotoLink { get; set; }
+
+        public ICollection<string> Skills { get; set; } = new List<string>();
 
         public string UniversityName { get; set; }
 

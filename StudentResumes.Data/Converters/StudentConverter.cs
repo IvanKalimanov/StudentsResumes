@@ -14,6 +14,7 @@ namespace StudentResumes.Data.Converters
             {
                 Id = studentDto.Id,
                 ResumeLink = studentDto.ResumeLink,
+                PhotoLink = studentDto.PhotoLink,
                 RefereeId = studentDto.RefereeId,
                 Name = studentDto.Name,
                 CourseNumber = studentDto.CourseNumber,
@@ -25,6 +26,7 @@ namespace StudentResumes.Data.Converters
             {
                 Id = student.Id,
                 ResumeLink = student.ResumeLink,
+                PhotoLink = student.PhotoLink,
                 RefereeId = student.RefereeId,
                 Name = student.Name,
                 CourseNumber = student.CourseNumber,

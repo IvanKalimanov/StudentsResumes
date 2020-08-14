@@ -162,6 +162,7 @@ namespace StudentResumes.API
         private void AddSettings(IServiceCollection services)
         {
             services.Configure<EnvironmentConfig>(Configuration);
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
         }
 
 

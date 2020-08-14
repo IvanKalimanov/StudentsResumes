@@ -2,14 +2,17 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using StudentResumes.API.Models;
 using StudentResumes.Core.Models;
 using StudentResumes.Data.Dto;
 using StudentResumes.Data.Entities;
 using StudentResumes.Data.Repositories;
+using StudentResumes.Data.Settings;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,11 +23,13 @@ namespace StudentResumes.API.Controllers
     {
         private readonly IStudentRepository _repository;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly AppSettings _appSettings;
 
-        public StudentController(IStudentRepository repository, IWebHostEnvironment webHostEnvironment)
+        public StudentController(IStudentRepository repository, IWebHostEnvironment webHostEnvironment, IOptions<AppSettings> appOptions)
         {
             _repository = repository;
             _webHostEnvironment = webHostEnvironment;
+            _appSettings = appOptions.Value;
         }
 
         /// <summary>
@@ -57,10 +62,11 @@ namespace StudentResumes.API.Controllers
         }
 
         /// <summary>
-        /// Create student and upload reusme file
+        /// Create student and upload files
         /// </summary>
+        /// <param name="resumeFile"></param>
+        /// <param name="photoFile"></param>
         /// <param name="studentModel"></param>
-        /// <param name="file"></param>
         /// <response code="200">Returns new student</response>
         /// <response code="401">Unauthorized</response>
         /// <response code="500">If something goes wrong on server</response>
@@ -68,8 +74,11 @@ namespace StudentResumes.API.Controllers
         [SwaggerResponse(statusCode: 200, type: typeof(Response<StudentDto>), description: "New student")]
         [HttpPost("createandupload")]
         [Authorize]
-        public async Task<IActionResult> Post(IFormFile file, StudentCreatingModel studentModel)
+        public async Task<IActionResult> Post(IFormFile resumeFile, IFormFile photoFile, StudentCreatingModel studentModel)
         {
+            if (!(CheckResumeExtension(resumeFile) && CheckStudentPhotoExtension(photoFile)))
+                return new JsonResult(new Response<bool>(400, "Check files extensions or existing"));
+
             var student = new StudentDto()
             {
                 Name = studentModel.Name,
@@ -78,7 +87,7 @@ namespace StudentResumes.API.Controllers
                 UniversityName = studentModel.UniversityName,
                 RefereeId = studentModel.RefereeId
             };
-            var result = await _repository.CreateWithResumeAsync(student, file, _webHostEnvironment.ContentRootPath);
+            var result = await _repository.CreateWithFilesAsync(student, photoFile, resumeFile, _webHostEnvironment.ContentRootPath);
 
             return new JsonResult(new Response<StudentDto>(result));
         }
@@ -118,11 +127,37 @@ namespace StudentResumes.API.Controllers
         /// <response code="500">If something goes wrong on server</response>
         [SwaggerOperation("UploadResume")]
         [SwaggerResponse(statusCode: 200, type: typeof(Response<bool>), description: "True if success")]
-        [HttpPost("upload/{studentId}")]
+        [HttpPost("uploadresume/{studentId}")]
         [Authorize]
         public async Task<IActionResult> UploadResume(Guid studentId, IFormFile file)
         {
-            var result = await _repository.UploadResumeFileAsync(file, studentId, _webHostEnvironment.WebRootPath);
+            if (!CheckResumeExtension(file))
+                return new JsonResult(new Response<bool>(400, "Check files extensions or exisiting"));
+
+            var result = await _repository.UploadResumeFileAsync(file, studentId, _webHostEnvironment.ContentRootPath);
+
+            return new JsonResult(new Response<bool>(result));
+        }
+
+        /// <summary>
+        /// Upload student photo file
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <param name="file"></param>
+        /// <response code="200">Returns true if success</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="404">If entity was not found</response>
+        /// <response code="500">If something goes wrong on server</response>
+        [SwaggerOperation("UploadResume")]
+        [SwaggerResponse(statusCode: 200, type: typeof(Response<bool>), description: "True if success")]
+        [HttpPost("uploadphoto/{studentId}")]
+        [Authorize]
+        public async Task<IActionResult> UploadStudentPhoto(Guid studentId, IFormFile file)
+        {
+            if (!CheckStudentPhotoExtension(file))
+                return new JsonResult(new Response<bool>(400, "Check file extension or exisiting"));
+
+            var result = await _repository.UploadStudentPhotoFileAsync(file, studentId, _webHostEnvironment.ContentRootPath);
 
             return new JsonResult(new Response<bool>(result));
         }
@@ -161,5 +196,27 @@ namespace StudentResumes.API.Controllers
         {
             return new JsonResult(new Response<bool>(await _repository.UpdateAsync(student)));
         }
+
+        #region Private methods
+
+        private bool CheckResumeExtension(IFormFile file)
+        {
+            if (file == null)
+                return false;
+
+            var fileExtension = Path.GetExtension(file.FileName);
+            return  _appSettings.AcceptedResumeExtensions.Contains(fileExtension);
+        }
+
+        private bool CheckStudentPhotoExtension(IFormFile file)
+        {
+            if (file == null)
+                return false;
+
+            var fileExtension = Path.GetExtension(file.FileName);
+            return _appSettings.AcceptedStudentPhotoExtensions.Contains(fileExtension);
+        }
+        #endregion
+
     }
 }

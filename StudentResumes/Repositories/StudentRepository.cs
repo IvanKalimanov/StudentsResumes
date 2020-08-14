@@ -34,12 +34,15 @@ namespace StudentResumes.Core.Repositories
             return StudentConverter.Convert(await CreateStudentAsync(studentDto));
         }
 
-        public async Task<StudentDto> CreateWithResumeAsync(StudentDto studentDto, IFormFile file, string rootPath)
+        public async Task<StudentDto> CreateWithFilesAsync(StudentDto studentDto, IFormFile photo, IFormFile resume, string rootPath)
         {
             var student = await CreateStudentAsync(studentDto);
             
-            if (file != null && student != null)
-                await UploadResumeFileAsync(file, student.Id, rootPath);
+            if (resume != null && student != null)
+                await UploadResumeFileAsync(resume, student.Id, rootPath);
+
+            if (resume != null && student != null)
+                await UploadStudentPhotoFileAsync(photo, student.Id, rootPath);
 
             return StudentConverter.Convert(student);
         }
@@ -52,6 +55,13 @@ namespace StudentResumes.Core.Repositories
  
             _context.Students.Remove(student);
             await _context.SaveChangesAsync();
+
+            if (student.PhotoLink != null)
+                _storageService.RemoveFileByFullPath(student.PhotoLink);
+
+            if (student.ResumeLink != null)
+                _storageService.RemoveFileByFullPath(student.ResumeLink);
+
             return true;
         }
 
@@ -117,6 +127,31 @@ namespace StudentResumes.Core.Repositories
 
             student.ResumeLink = rootPath + '/' + link;
 
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> UploadStudentPhotoFileAsync(IFormFile file, Guid studentId, string rootPath)
+        {
+            var student = await _context.Students.FindAsync(studentId);
+
+            if (student == null)
+                throw new EntityNotFoundException();
+
+            if (student.PhotoLink != null)
+            {
+                _storageService.RemoveFileByFullPath(student.PhotoLink);
+                student.PhotoLink = null;
+            }
+            var filename = student.Name + "Photo" + Path.GetExtension(file.FileName);
+
+            var link = await _storageService.UploadAsync(file, filename, "photos/");
+
+            student.PhotoLink = rootPath + '/' + link;
+
+            await _context.SaveChangesAsync();
+
             return true;
         }
 
@@ -135,12 +170,13 @@ namespace StudentResumes.Core.Repositories
 
             var result = await _context.Students.AddAsync(student);
 
-            foreach (var skillName in studentDto.Skills)
-            {
-                var sk = await _context.Skills.FindAsync(skillName);
-                if (sk != null)
-                    await _context.StudentSkills.AddAsync(new StudentSkill(student.Id, sk.Name));
-            }
+            if (studentDto.Skills != null)
+                foreach (var skillName in studentDto.Skills)
+                {
+                    var sk = await _context.Skills.FindAsync(skillName);
+                    if (sk != null)
+                        await _context.StudentSkills.AddAsync(new StudentSkill(student.Id, sk.Name));
+                }
             if (student.RefereeId != null)
             {
                 var referee = await _refereeRepository.GetByIdAsync((Guid)student.RefereeId);

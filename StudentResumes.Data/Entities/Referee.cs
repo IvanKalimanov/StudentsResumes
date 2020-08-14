@@ -12,6 +12,6 @@ namespace StudentResumes.Data.Entities
 
         public string WorkPosition { get; set; }
 
-        public ICollection<Student> Students {get; set;}
+        public ICollection<Student> Students { get; set; } = new List<Student>();
     }
 }

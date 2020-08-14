@@ -14,7 +14,9 @@ namespace StudentResumes.Data.Entities
 
         public string ResumeLink { get; set; }
 
-        public ICollection<StudentSkill> StudentSkills { get; set; } 
+        public string PhotoLink { get; set; }
+
+        public ICollection<StudentSkill> StudentSkills { get; set; }
 
         public string UniversityName { get; set; }
 
