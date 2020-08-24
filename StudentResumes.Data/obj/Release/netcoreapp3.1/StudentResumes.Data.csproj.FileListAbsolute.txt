@@ -1,0 +1,9 @@
+C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.Data\bin\Release\netcoreapp3.1\StudentResumes.Data.deps.json
+C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.Data\bin\Release\netcoreapp3.1\StudentResumes.Data.dll
+C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.Data\bin\Release\netcoreapp3.1\StudentResumes.Data.pdb
+C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.Data\obj\Release\netcoreapp3.1\StudentResumes.Data.csprojAssemblyReference.cache
+C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.Data\obj\Release\netcoreapp3.1\StudentResumes.Data.csproj.CoreCompileInputs.cache
+C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.Data\obj\Release\netcoreapp3.1\StudentResumes.Data.AssemblyInfoInputs.cache
+C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.Data\obj\Release\netcoreapp3.1\StudentResumes.Data.AssemblyInfo.cs
+C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.Data\obj\Release\netcoreapp3.1\StudentResumes.Data.dll
+C:\Users\X1CARBON\Desktop\StudentResumes\StudentResumes.Data\obj\Release\netcoreapp3.1\StudentResumes.Data.pdb

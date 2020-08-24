@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StudentResumes.API</name>
+    </assembly>
+    <members>
+        <member name="M:StudentResumes.API.Controllers.AuthenticationController.Login(StudentResumes.API.Models.LoginViewModel)">
+            <summary>
+            Login
+            </summary>
+            <param name="form"></param>
+            <response code="200">User successfully logged in</response>
+            <response code="500">If something goes wrong on server or invalid password (login)</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.AuthenticationController.Register(StudentResumes.API.Models.LoginViewModel)">
+             <summary>
+             Register new user
+             </summary>
+             <param name="item"></param>
+             <remarks>
+             Sample request:
+            
+                 POST /register
+                 {
+                    "Email": "example@ex.ru",
+                    "Password": "asdaswqer123"
+                 }
+            
+             </remarks>
+             <response code="200">User successfully registered</response>
+             <response code="500">If something goes wrong on server or invalid password (login)</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.RefereeController.Get">
+            <summary>
+            Get all referees
+            </summary>
+            <response code="200">Returns all referees</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.RefereeController.Post(StudentResumes.API.Models.RefereeCreatingModel)">
+            <summary>
+            Create new referee
+            </summary>
+            <response code="200">Returns new referee</response>
+            <response code="401">Unauthorized</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.RefereeController.Delete(System.Guid)">
+            <summary>
+            Delete referee by id
+            </summary>
+            <param name="id"></param>
+            <response code="200">Returns true, if entity was deleted succefully</response>
+            <response code="401">Unauthorized</response>
+            <response code="404">If entity was not found</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.RefereeController.Update(StudentResumes.Data.Dto.RefereeDto)">
+            <summary>
+            Edit existing referee
+            </summary>
+            <param name="referee"></param>
+            <response code="200">Returns all referees</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.SkillController.Get">
+            <summary>
+            Get all skills
+            </summary>
+            <response code="200">Returns skills</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.SkillController.Post(System.String)">
+            <summary>
+            Create new skill
+            </summary>
+            <param name="name"></param>
+            <response code="200">Returns new skill</response>
+            <response code="401">Unauthorized</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.SkillController.Delete(System.String)">
+            <summary>
+            Delete skill by name
+            </summary>
+            <param name="name"></param>
+            <response code="200">Returns true, if skill was deleted succefully</response>
+            <response code="401">Unauthorized</response>
+            <response code="404">If entity was not found</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.StudentController.Get">
+            <summary>
+            Get all students
+            </summary>
+            <response code="200">Returns all students</response>
+            <response code="401">Unauthorized</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.StudentController.SearchByName(System.String)">
+            <summary>
+            Search students by name
+            </summary>
+            <param name="name"></param>
+            <response code="200">Returns all students</response>
+            <response code="401">Unauthorized</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.StudentController.Post(Microsoft.AspNetCore.Http.IFormFile,Microsoft.AspNetCore.Http.IFormFile,StudentResumes.API.Models.StudentCreatingModel)">
+            <summary>
+            Create student and upload files
+            </summary>
+            <param name="resumeFile"></param>
+            <param name="photoFile"></param>
+            <param name="studentModel"></param>
+            <response code="200">Returns new student</response>
+            <response code="401">Unauthorized</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.StudentController.Post(StudentResumes.API.Models.StudentCreatingModel)">
+            <summary>
+            Create student
+            </summary>
+            <param name="studentModel"></param>
+            <response code="200">Returns new student</response>
+            <response code="401">Unauthorized</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.StudentController.UploadResume(System.Guid,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Upload resume file
+            </summary>
+            <param name="studentId"></param>
+            <param name="file"></param>
+            <response code="200">Returns true if success</response>
+            <response code="401">Unauthorized</response>
+            <response code="404">If entity was not found</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.StudentController.UploadStudentPhoto(System.Guid,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Upload student photo file
+            </summary>
+            <param name="studentId"></param>
+            <param name="file"></param>
+            <response code="200">Returns true if success</response>
+            <response code="401">Unauthorized</response>
+            <response code="404">If entity was not found</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.StudentController.Delete(System.Guid)">
+            <summary>
+            Delete student
+            </summary>
+            <param name="id"></param>
+            <response code="200">Returns true if success</response>
+            <response code="401">Unauthorized</response>
+            <response code="404">If entity was not found</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.StudentController.Update(StudentResumes.Data.Dto.StudentDto)">
+            <summary>
+            Edit student
+            </summary>
+            <param name="student"></param>
+            <response code="200">Returns true if success</response>
+            <response code="401">Unauthorized</response>
+            <response code="404">If entity was not found</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.StudentSkillController.Get">
+            <summary>
+            Get all Student-skill entities
+            </summary>
+            <response code="200">Returns student-skill entities</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.StudentSkillController.Get(System.String)">
+            <summary>
+            Get all Student-skill entities by skill
+            </summary>
+            <param name="skillName"></param>
+            <response code="200">Returns student-skill entities</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.StudentSkillController.GetByStudentId(System.Guid)">
+            <summary>
+            Get Student-skill entities by student Id
+            </summary>
+            <param name="id"></param>
+            <response code="200">Returns student-skill entities</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.StudentSkillController.SearchStudentsBySkills(System.Collections.Generic.List{System.String})">
+            <summary>
+            Get Students by skill names list
+            </summary>
+            <param name="skills"></param>
+            <response code="200">Returns needing student</response>
+            <response code="401">Unauthorized</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+        <member name="M:StudentResumes.API.Controllers.StudentSkillController.Post(StudentResumes.API.Models.StudentSkillModel)">
+            <summary>
+            Create StudentSkill entities for one student
+            </summary>
+            <response code="200">Returns new student-skill entity</response>
+            <response code="401">Unauthorized</response>
+            <response code="500">If something goes wrong on server</response>
+        </member>
+    </members>
+</doc>
