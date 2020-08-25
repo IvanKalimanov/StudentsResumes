@@ -81,7 +81,7 @@ namespace StudentResumes.API
 
             EnableSwagger(app);
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

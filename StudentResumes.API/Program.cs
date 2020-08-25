@@ -21,7 +21,7 @@ namespace StudentResumes.API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
-                    .UseUrls("http://localhost:5003", "https://localhost:5004");
+                    .UseUrls("http://localhost:5003");
                 });
     }
 }
