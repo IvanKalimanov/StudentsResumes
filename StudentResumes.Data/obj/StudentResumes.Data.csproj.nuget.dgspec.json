@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.Data\\StudentResumes.Data.csproj": {}
+    "C:\\Users\\X1CARBON\\Desktop\\StudentsResumes\\StudentResumes.Data\\StudentResumes.Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.Data\\StudentResumes.Data.csproj": {
+    "C:\\Users\\X1CARBON\\Desktop\\StudentsResumes\\StudentResumes.Data\\StudentResumes.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.Data\\StudentResumes.Data.csproj",
+        "projectUniqueName": "C:\\Users\\X1CARBON\\Desktop\\StudentsResumes\\StudentResumes.Data\\StudentResumes.Data.csproj",
         "projectName": "StudentResumes.Data",
-        "projectPath": "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.Data\\StudentResumes.Data.csproj",
+        "projectPath": "C:\\Users\\X1CARBON\\Desktop\\StudentsResumes\\StudentResumes.Data\\StudentResumes.Data.csproj",
         "packagesPath": "C:\\Users\\X1CARBON\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.Data\\obj\\",
+        "outputPath": "C:\\Users\\X1CARBON\\Desktop\\StudentsResumes\\StudentResumes.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

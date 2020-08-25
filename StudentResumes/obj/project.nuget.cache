@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dM4aBfE95UdgtIUDOpArz2a73sWpY+EgllKPbp0X8lEh7vlBXbLrXgq8Ds4PXqrPvReFATgVI9K00GU8fwH0fg==",
+  "dgSpecHash": "0d6+YuBPzLVAI9Vvtal1tLDk8PMre2L37teoVpZ+T+laVAZmXN4thhi2bj54IF5WH8Uk2Z4LsN2OJH/m3SBSjg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes\\StudentResumes.Core.csproj",
+  "projectFilePath": "C:\\Users\\X1CARBON\\Desktop\\StudentsResumes\\StudentResumes\\StudentResumes.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\X1CARBON\\.nuget\\packages\\entityframework\\6.1.0\\entityframework.6.1.0.nupkg.sha512",
     "C:\\Users\\X1CARBON\\.nuget\\packages\\microsoft.aspnet.identity.core\\2.2.3\\microsoft.aspnet.identity.core.2.2.3.nupkg.sha512",

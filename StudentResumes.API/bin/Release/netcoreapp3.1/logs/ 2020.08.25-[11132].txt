@@ -1,0 +1,2 @@
+﻿2020-08-25 11:48:05,262  INFO  Service started
+2020-08-25 11:48:05,286  INFO  Settings Production

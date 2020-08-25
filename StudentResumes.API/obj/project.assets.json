@@ -7546,11 +7546,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.API\\StudentResumes.API.csproj",
+      "projectUniqueName": "C:\\Users\\X1CARBON\\Desktop\\StudentsResumes\\StudentResumes.API\\StudentResumes.API.csproj",
       "projectName": "StudentResumes.API",
-      "projectPath": "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.API\\StudentResumes.API.csproj",
+      "projectPath": "C:\\Users\\X1CARBON\\Desktop\\StudentsResumes\\StudentResumes.API\\StudentResumes.API.csproj",
       "packagesPath": "C:\\Users\\X1CARBON\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.API\\obj\\",
+      "outputPath": "C:\\Users\\X1CARBON\\Desktop\\StudentsResumes\\StudentResumes.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -7569,11 +7569,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.Data\\StudentResumes.Data.csproj": {
-              "projectPath": "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes.Data\\StudentResumes.Data.csproj"
+            "C:\\Users\\X1CARBON\\Desktop\\StudentsResumes\\StudentResumes.Data\\StudentResumes.Data.csproj": {
+              "projectPath": "C:\\Users\\X1CARBON\\Desktop\\StudentsResumes\\StudentResumes.Data\\StudentResumes.Data.csproj"
             },
-            "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes\\StudentResumes.Core.csproj": {
-              "projectPath": "C:\\Users\\X1CARBON\\Desktop\\StudentResumes\\StudentResumes\\StudentResumes.Core.csproj"
+            "C:\\Users\\X1CARBON\\Desktop\\StudentsResumes\\StudentResumes\\StudentResumes.Core.csproj": {
+              "projectPath": "C:\\Users\\X1CARBON\\Desktop\\StudentsResumes\\StudentResumes\\StudentResumes.Core.csproj"
             }
           }
         }
